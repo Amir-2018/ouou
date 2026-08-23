@@ -1,37 +1,36 @@
-version: "3.8"
-
 services:
   app:
     build:
       context: .
-      dockerfile: DockerFile
+      dockerfile: Dockerfile
     ports:
       - "8084:8084"
     depends_on:
-      - mysql
+      - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ouou?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ouou
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: Amir-169114
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
     restart: unless-stopped
     networks:
       - appnet
 
-  mysql:
-    image: mysql:8.0
+  postgres:
+    image: postgres:17
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ouou
+      POSTGRES_DB: ouou
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Amir-169114
     ports:
-      - "3307:3306"
+      - "5433:5432"
     volumes:
-      - mysql-data:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
+      - postgres-data:/var/lib/postgresql/data
     networks:
       - appnet
 
 volumes:
-  mysql-data:
+  postgres-data:
 
 networks:
-  appnet: 
+  appnet:

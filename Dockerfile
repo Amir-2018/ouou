@@ -7,7 +7,7 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY src ./src
 
-RUN chmod +x ./mvnw && ./mvnw -DskipTests package
+RUN chmod +x ./mvnw && ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:17-jdk
 
@@ -16,4 +16,5 @@ WORKDIR /app
 COPY --from=build /workspace/target/ouou-accessories.jar app.jar
 
 EXPOSE 8084
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
