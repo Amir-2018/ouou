@@ -37,13 +37,11 @@ public class CommandeService {
     }
 
     public CommandeDTO saveCommand(CommandeDTO commandeDTO) {
-        try{
-            System.out.println("I will map") ;
-            // commandRepository.save(modelMapper.map(commandeDTO, Commande.class));
-            return commandeDTO;
-        }catch(Exception e) {
-            return null ;
-        }
+        Commande commande = modelMapper.map(commandeDTO, Commande.class);
+        Commande savedCommande = commandRepository.save(commande);
+        return modelMapper.map(savedCommande, CommandeDTO.class);
+
+
     }
 
 

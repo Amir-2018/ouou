@@ -15,6 +15,8 @@ public class Product {
     private String description ;
     @Column(name = "price")
     private String price ;
+    @Column(name = "qteStock")
+    private String qteStock ;
     @Column(name = "image", columnDefinition = "bytea")
     private byte[] image;
 

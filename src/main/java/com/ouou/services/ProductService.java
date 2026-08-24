@@ -1,8 +1,6 @@
 package com.ouou.services;
 
-import com.ouou.dto.CategorieDTO;
 import com.ouou.dto.ProductDTO;
-import com.ouou.models.Categorie;
 import com.ouou.models.Product;
 import com.ouou.repos.ProductRepo;
 import jakarta.transaction.Transactional;
@@ -28,6 +26,7 @@ public class ProductService {
         List<Product> productList = productRepo.findAll();
         return modelMapper.map(productList, new TypeToken<List<ProductDTO>>() {}.getType());
     }
+
 
     public ProductDTO getProductById(int product_id) {
         Product product = productRepo.findById(product_id)

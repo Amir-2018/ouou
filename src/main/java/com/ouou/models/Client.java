@@ -1,7 +1,9 @@
 package com.ouou.models;
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class Client {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,27 +14,5 @@ public class Client {
 	@Column(name = "password")
 	private String password ;
 	
-	public int getId() {
-        return id;
-    }
 
-	
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
