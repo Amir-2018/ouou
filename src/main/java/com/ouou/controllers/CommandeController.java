@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "api/v1/command/")
+@RequestMapping(value = "api/v1/commande/")
 
 public class CommandeController {
     @Autowired
@@ -19,6 +19,11 @@ public class CommandeController {
     @GetMapping("/getCommands")
     public List<CommandeDTO> getCommands() {
         return commandeService.getAllCommands();
+    }
+
+    @GetMapping("/getCommandeById/{commande_id}")
+    public CommandeDTO getCommandeById(@PathVariable int commande_id) {
+        return commandeService.getCommanBdeyId(commande_id);
     }
 
     @PostMapping("/saveCommand")

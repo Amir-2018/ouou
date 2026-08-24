@@ -29,13 +29,17 @@ public class CommandeService {
         return modelMapper.map(commandList, new TypeToken<List<CommandeDTO>>() {}.getType());
     }
 
+    public CommandeDTO getCommanBdeyId(int command_id) {
+        Commande commande = commandRepository.findById(command_id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + command_id));
+
+        return modelMapper.map(commande, CommandeDTO.class);
+    }
+
     public CommandeDTO saveCommand(CommandeDTO commandeDTO) {
         try{
-            System.out.println("will save ");
-            System.out.println(commandeDTO);
-            System.out.println("After mapper");
-            modelMapper.map(commandeDTO, Commande.class) ;
-            commandRepository.save(modelMapper.map(commandeDTO, Commande.class));
+            System.out.println("I will map") ;
+            // commandRepository.save(modelMapper.map(commandeDTO, Commande.class));
             return commandeDTO;
         }catch(Exception e) {
             return null ;

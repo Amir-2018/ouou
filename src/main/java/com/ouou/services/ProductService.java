@@ -29,6 +29,13 @@ public class ProductService {
         return modelMapper.map(productList, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 
+    public ProductDTO getProductById(int product_id) {
+        Product product = productRepo.findById(product_id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + product_id));
+
+        return modelMapper.map(product, ProductDTO.class);
+    }
+
     public ProductDTO saveProduct(ProductDTO productDTO) {
         try{
         productRepo.save(modelMapper.map(productDTO, Product.class));
