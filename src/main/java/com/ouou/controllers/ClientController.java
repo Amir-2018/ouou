@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ouou.dto.UserDTO;
-import com.ouou.services.UserService;
+import com.ouou.dto.ClientDTO;
+import com.ouou.services.ClientService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping ; 
 import org.springframework.web.bind.annotation.RequestBody ; 
@@ -16,24 +16,24 @@ import org.springframework.web.bind.annotation.PathVariable ;
 @RestController
 @CrossOrigin
 @RequestMapping(value = "api/v1/")
-public class UserController {
+public class ClientController {
 
     @Autowired
-    private UserService userService;
+    private ClientService userService;
 
     
     @GetMapping("/getusers")
-    public List<UserDTO> getUser() {
+    public List<ClientDTO> getUser() {
         return userService.getAllUsers();
     }
 
     @PostMapping("/saveuser")
-    public UserDTO saveUser(@RequestBody UserDTO userDTO) {
+    public ClientDTO saveUser(@RequestBody ClientDTO userDTO) {
         return userService.saveUser(userDTO);
     }
 
     @PutMapping("/updateuser")
-    public UserDTO updateUser(@RequestBody UserDTO userDTO) {
+    public ClientDTO updateUser(@RequestBody ClientDTO userDTO) {
         return userService.updateUser(userDTO);
     }
 

@@ -2,7 +2,7 @@ package com.ouou.models;
 import jakarta.persistence.*;
 
 @Entity
-public class User {
+public class Client {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ouou.dto.CategorieDTO;
-import com.ouou.dto.UserDTO;
 import com.ouou.models.Categorie;
-import com.ouou.models.User;
 import com.ouou.repos.CategoryRepo;
 
 import jakarta.transaction.Transactional;

@@ -1,13 +1,13 @@
 package com.ouou.repos;
 
+import com.ouou.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ouou.models.User;
 
 @Repository
-	public interface UserRepo extends JpaRepository<User, Integer> {
+public interface ProductRepo extends JpaRepository<Product, Integer> {
 
-	}
+}
 
 
