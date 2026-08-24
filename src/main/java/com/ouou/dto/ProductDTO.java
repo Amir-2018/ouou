@@ -12,5 +12,6 @@ public class ProductDTO {
     private String name ;
     private String description ;
     private String price ;
+    private byte[] image;
 
 }

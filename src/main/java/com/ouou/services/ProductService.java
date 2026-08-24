@@ -52,6 +52,9 @@ public class ProductService {
         productDTOSearched.setName(productDTO.getName());
         productDTOSearched.setDescription(productDTO.getDescription());
         productDTOSearched.setPrice(productDTO.getPrice());
+        if (productDTO.getImage() != null) {
+            productDTOSearched.setImage(productDTO.getImage());
+        }
 
 
 
