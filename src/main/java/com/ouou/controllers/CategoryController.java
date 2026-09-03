@@ -1,6 +1,7 @@
 package com.ouou.controllers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,12 +22,12 @@ public class CategoryController {
     @Autowired
     private CategorieService categorieService;
 
-    
+    @PreAuthorize("hasRole('client_user')")
     @GetMapping("/getcategories")
     public List<CategorieDTO> getCategorie() {
         return categorieService.getAllCategories();
     }
-
+    @PreAuthorize("hasRole('client_admin')")
     @PostMapping("/savecategorie")
     public CategorieDTO saveCategory(@RequestBody CategorieDTO categorieDTO) {
     	return categorieService.saveCategorie(categorieDTO);

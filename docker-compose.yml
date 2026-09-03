@@ -5,29 +5,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8084:8084"
-    depends_on:
-      - postgres
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/ouou
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: Amir-169114
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dpg-daapsi8ae00c73ev01j0-a.frankfurt-postgres.render.com:5432/ouou
+      SPRING_DATASOURCE_USERNAME: ouou_user
+      SPRING_DATASOURCE_PASSWORD: okqrAhYkmqyyLfoFijBTcAfyRFikMn5j
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
     restart: unless-stopped
-    networks:
-      - appnet
-
-  postgres:
-    image: postgres:17
-    environment:
-      POSTGRES_DB: ouou
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Amir-169114
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    networks:
-      - appnet
 
   nginx:
     image: nginx:alpine
@@ -39,8 +22,6 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     restart: unless-stopped
-volumes:
-  postgres-data:
 
 networks:
   appnet:
