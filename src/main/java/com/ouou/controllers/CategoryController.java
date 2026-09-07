@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ouou.dto.CategorieDTO;
 import com.ouou.services.CategorieService;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping ; 
-import org.springframework.web.bind.annotation.RequestBody ; 
-import org.springframework.web.bind.annotation.PathVariable ; 
+import org.springframework.web.bind.annotation.RequestMapping ;
+import org.springframework.web.bind.annotation.RequestBody ;
+import org.springframework.web.bind.annotation.PathVariable ;
 
 @RestController
 @CrossOrigin
@@ -22,23 +22,26 @@ public class CategoryController {
     @Autowired
     private CategorieService categorieService;
 
-    @PreAuthorize("hasRole('client_user')")
+    @PreAuthorize("hasAnyRole('client_user','client_admin')")
     @GetMapping("/getcategories")
     public List<CategorieDTO> getCategorie() {
         return categorieService.getAllCategories();
     }
+
     @PreAuthorize("hasRole('client_admin')")
     @PostMapping("/savecategorie")
     public CategorieDTO saveCategory(@RequestBody CategorieDTO categorieDTO) {
     	return categorieService.saveCategorie(categorieDTO);
-  
+
     }
 
+    @PreAuthorize("hasRole('client_admin')")
     @PutMapping("/updatecategorie/{categorieId}")
     public CategorieDTO updateCategorie(@RequestBody CategorieDTO categorieDTO, @PathVariable int categorieId) {
         return categorieService.updateCategorie(categorieDTO,categorieId);
     }
 
+    @PreAuthorize("hasRole('client_admin')")
     @DeleteMapping("deletecategorie/{categorieId}")
     public String deleteCategorie(@PathVariable int categorieId) {
         return categorieService.deleteCategorie(categorieId);

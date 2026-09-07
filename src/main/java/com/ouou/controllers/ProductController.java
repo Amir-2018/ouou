@@ -1,14 +1,16 @@
 package com.ouou.controllers;
-import java.util.List;
-import java.io.IOException;
 
-import com.ouou.dto.CategorieDTO;
+import java.util.List;
+
 import com.ouou.dto.ProductDTO;
-import com.ouou.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import com.ouou.services.ProductService;
 
 @RestController
 @CrossOrigin
@@ -18,22 +20,25 @@ public class ProductController {
     @Autowired
     private ProductService productServices;
 
-
+    @PreAuthorize("hasAnyRole('client_user','client_admin')")
     @GetMapping("/getProducts")
     public List<ProductDTO> getProducts() {
         return productServices.getAllProducts();
     }
 
+    @PreAuthorize("hasAnyRole('client_user','client_admin')")
     @GetMapping("/getProductById/{product_id}")
     public ProductDTO getProductById(@PathVariable int product_id) {
         return productServices.getProductById(product_id);
     }
 
+    @PreAuthorize("hasRole('client_admin')")
     @PostMapping("/saveProduct")
     public ProductDTO saveProduct(@RequestBody ProductDTO productDTO) {
         return productServices.saveProduct(productDTO);
     }
 
+    @PreAuthorize("hasRole('client_admin')")
     @PostMapping(value = "/saveProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ProductDTO saveProductWithImage(
             @RequestPart("name") String name,
@@ -48,15 +53,16 @@ public class ProductController {
         return productServices.saveProduct(productDTO);
     }
 
+    @PreAuthorize("hasRole('client_admin')")
     @PutMapping("/updateProduct/{productId}")
     public ProductDTO updateProduct(@RequestBody ProductDTO productDTO, @PathVariable int productId) {
         return productServices.updateProduct(productDTO,productId);
     }
 
+    @PreAuthorize("hasRole('client_admin')")
     @DeleteMapping("deleteProduct/{productId}")
     public String deleteProduct(@PathVariable int productId) {
         return productServices.deleteProduct(productId);
     }
-
 
 }
